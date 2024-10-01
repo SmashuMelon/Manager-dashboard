@@ -13,13 +13,6 @@ Back End: Django, Django Rest Framework
 - ##### Django - Django Rest Framework
 
 
-## Getting started
-
-**1.** In order to run this app, you need to have `node.js`, python, django and package manager like npm or yarn installed.
-
-**2.** Clone the Git Repository: `https://github.com/daniel-liemng/employyee_react_django.git`
-
-**3.** Install server-side and client-side dependencies
 
 ##### Environment variables
 
