@@ -1,68 +1,47 @@
-import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useState } from 'react';
 import LoginPage from './components/LoginPage';
 import DepartmentSection from './components/department/DepartmentSection';
 import EmployeeSection from './components/employee/EmployeeSection';
 import TaskSection from './components/task/TaskSection';
-import Taskboard from './components/Taskboard'; // Import your Taskboard component
-import { Button, Box } from '@mui/material';
 
 const App = () => {
-  const [token, setToken] = useState<string | null>(null);
-
-  useEffect(() => {
-    const savedToken = localStorage.getItem('token');
-    if (savedToken) {
-      setToken(savedToken);
-    }
-  }, []);
+  const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 
   const handleLogin = (token: string) => {
     setToken(token);
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', token);  // Store token in local storage
   };
 
   const handleLogout = () => {
-    setToken(null);
-    localStorage.removeItem('token');
+    setToken(null); // Clear the token from state
+    localStorage.removeItem('token'); // Remove the token from local storage
   };
 
-  return (
-    <Router>
-      <div className="flex gap-3 h-full w-full min-h-screen p-5 flex-wrap">
-        <Box display="flex" justifyContent="flex-end" width="100%" p={2}>
-          {token && (
-            <Button variant="contained" color="secondary" onClick={handleLogout}>
-              Logout
-            </Button>
-          )}
-        </Box>
+  // If the user is not logged in, show the login page
+  if (!token) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
 
-        <Routes>
-          {/* Default route for task sections */}
-          <Route path="/" element={
-            token ? (
-              <>
-                <DepartmentSection />
-                <EmployeeSection />
-                <TaskSection />
-              </>
-            ) : (
-              <Navigate to="/login" />
-            )
-          } />
-          
-          {/* Route for Taskboard, accessible without authentication */}
-          <Route path="/taskboard" element={<Taskboard />} />
-          
-          {/* Route for Login */}
-          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-          
-          {/* Redirect to home if the route is unknown */}
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Header Section */}
+      <header className="flex justify-between items-center p-4 bg-teal-500 shadow">
+        <h1 className="text-xl font-bold text-white">Management Panel</h1>
+        <button
+          className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+      </header>
+
+      {/* Main Content */}
+      <div className="flex gap-3 flex-1 w-full p-5">
+        <DepartmentSection />
+        <EmployeeSection />
+        <TaskSection />
       </div>
-    </Router>
+    </div>
   );
 };
 
