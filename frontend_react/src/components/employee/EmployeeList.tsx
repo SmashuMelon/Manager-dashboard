@@ -55,7 +55,7 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ searchText }) => {
             <th className='border border-slate-600 p-3 bg-slate-700'>
               Location
             </th>
-            <th className='border border-slate-600 p-3 bg-slate-700'>Status</th>
+            <th className='border border-slate-600 p-3 bg-slate-700'></th>
             <th className='border border-slate-600 p-3 bg-slate-700'>Action</th>
           </tr>
         </thead>
@@ -76,17 +76,9 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ searchText }) => {
                 </td>
                 <td className='border border-slate-700 p-3'>
                   {employee.location}
-                </td>
+                  </td>
                 <td className='border border-slate-700 border-b-0 p-3 flex justify-center'>
-                  {employee.status ? (
-                    <div className='w-fit h-fit px-3 py-1 bg-teal-300 text-gray-700 text-sm font-medium rounded-full flex justify-center items-center border-b-0'>
-                      Active
-                    </div>
-                  ) : (
-                    <div className='w-fit h-fit px-3 py-1 bg-red-400 text-gray-700 text-sm font-medium rounded-full flex justify-center items-center'>
-                      Inactive
-                    </div>
-                  )}
+                 
                 </td>
                 <td className='border border-slate-700 p-3'>
                   <div className='flex justify-center gap-2'>
