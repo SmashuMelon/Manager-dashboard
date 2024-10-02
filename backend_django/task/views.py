@@ -56,4 +56,3 @@ def complete_task(request, pk):
     task.is_completed = True
     task.save()
     return Response({'message': 'Task marked as complete'}, status=status.HTTP_200_OK)
-
